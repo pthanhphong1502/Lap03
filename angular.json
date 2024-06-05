@@ -39,9 +39,13 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -105,5 +109,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "bd6e7253-edf0-4258-9a94-d08c30a337d8"
   }
 }
