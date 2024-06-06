@@ -4,8 +4,8 @@
       <!-- SideBar -->
       <div class="left-card me-4" style="background-color: aqua; height: 800px;"></div>
       <!-- Tab -->
-      <div class="menu-container position-relative align-items-center me-5">
-        <div class="tab d-flex gap-3">
+      <div class="menu-container position-relative align-items-center me-3">
+        <div class="tab d-flex gap-3 rounded">
           <div class="menu-wrapper overflow-hidden position-relative">
             <button class="scroll-btn left bg-white border-0 h-100" (click)="scrollLeftButton()" *ngIf="showLeftButton">
               <i class="bi bi-chevron-left"></i>
@@ -23,7 +23,7 @@
             </button>
           </div>
 
-          <div class="icon-all">
+          <div class="icon-all me-3">
             <button class="exclude-this btn-arrow-down" (click)="toggleDropdown()">
               <i class="bi bi-chevron-down"> </i>
             </button>
@@ -82,6 +82,8 @@
             </div>
           </div>
         </div>
+        <!-- Content -->
+        <div>Content</div>
       </div>
     </div>
   </div>
