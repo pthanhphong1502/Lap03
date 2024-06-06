@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ClickOutsideDirective } from './common/directives/click-outside/click-outside.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,

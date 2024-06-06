@@ -5,12 +5,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit, AfterViewInit{
-
-  ngOnInit(): void {
-    this.lstTab;
-    console.log(this.lstTab);
-  }
+export class AppComponent implements OnInit {
   @ViewChild('menu', { static: false }) menu!: ElementRef;
   isMouseDown = false;
   startX = 0;
@@ -18,9 +13,31 @@ export class AppComponent implements OnInit, AfterViewInit{
   showLeftButton = false;
   showRightButton = true;
   dropdownOpen = false;
+  tabActive: any;
+  active = true;
 
+  selectItem(index: number): void {
+    this.tabActive = this.lstTab[index];
+  }
+
+  ngOnInit(): void {
+    this.lstTab;
+    this.tabActive = this.lstTab[0];
+    console.log('tabActive', this.tabActive)
+    console.log(this.lstTab);
+    for (let i = 0; i < this.lstTab.length; i++) {
+
+    }
+  }
+
+  // Tắt mở Dropdown button ALL
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  onOutsideClick(){
+    this.dropdownOpen=false;
+    console.log('Click ra ngoài')
   }
 
   items = [
@@ -77,7 +94,7 @@ export class AppComponent implements OnInit, AfterViewInit{
       largeIcon: "bi bi-check-square",
       module: "HR",
       parentID: "HRT101d",
-      url: "hr/emplist/HREM101",
+      url: "hr/emplist/HREM102",
       userID: ""
     },
     {
@@ -93,7 +110,7 @@ export class AppComponent implements OnInit, AfterViewInit{
       largeIcon: "bi bi-person",
       module: "HR",
       parentID: "HRT101d",
-      url: "hr/emplist/HREM101",
+      url: "hr/emplist/HREM103",
       userID: ""
     },
     {
@@ -109,7 +126,7 @@ export class AppComponent implements OnInit, AfterViewInit{
       largeIcon: "bi bi-clock",
       module: "HR",
       parentID: "HRT101d",
-      url: "hr/emplist/HREM101",
+      url: "hr/emplist/HREM104",
       userID: ""
     },
     {
@@ -125,7 +142,7 @@ export class AppComponent implements OnInit, AfterViewInit{
       largeIcon: "bi bi-person",
       module: "HR",
       parentID: "HRT101d",
-      url: "hr/emplist/HREM101",
+      url: "hr/emplist/HREM105",
       userID: ""
     },
     {
@@ -141,7 +158,7 @@ export class AppComponent implements OnInit, AfterViewInit{
       largeIcon: "bi bi-person",
       module: "HR",
       parentID: "HRT101d",
-      url: "hr/emplist/HREM101",
+      url: "hr/emplist/HREM106",
       userID: ""
     },
     {
@@ -157,7 +174,7 @@ export class AppComponent implements OnInit, AfterViewInit{
       largeIcon: "bi bi-person",
       module: "HR",
       parentID: "HRT101d",
-      url: "hr/emplist/HREM101",
+      url: "hr/emplist/HREM107",
       userID: ""
     },
     {
@@ -173,7 +190,7 @@ export class AppComponent implements OnInit, AfterViewInit{
       largeIcon: "bi bi-journal",
       module: "HR",
       parentID: "HRT101d",
-      url: "hr/emplist/HREM101",
+      url: "hr/emplist/HREM108",
       userID: ""
     },
     {
@@ -189,20 +206,20 @@ export class AppComponent implements OnInit, AfterViewInit{
       largeIcon: "bi bi-briefcase",
       module: "HR",
       parentID: "HRT101d",
-      url: "hr/emplist/HREM101",
+      url: "hr/emplist/HREM109",
       userID: ""
     },
   ];
 
-  childrenTabs = [
-    {
-
-    }
-  ]
-
-  ngAfterViewInit() {
-    this.checkScrollButtons();
-  }
+  lstFuncCurriculumVitae: any = []; // SYLL
+  lstFuncLegalInfo: any = []; // Pháp lý
+  lstFuncSalaryBenefit: any = []; // Phúc lợi
+  lstFuncHRProcess: any = []; // QTLV
+  lstFuncAward: any = []; // Khen thưởng - Kỹ luật
+  lstFuncKnowledge: any = []; // Kiến thức
+  lstFuncHealth: any = []; // Sức khỏe
+  lstFuncQuitJob: any = []; // Thôi việc
+  lstFuncChangeInfo: any = []; // Theo dõi thay đổi
 
   scrollLeftButton() {
     this.menu.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });

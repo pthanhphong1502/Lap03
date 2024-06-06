@@ -1,39 +1,24 @@
 <div class="page-pw h-employee pb-0">
   <div class="page-profile">
     <div class="d-flex">
-      <div class="me-4" class="left-card" style="background-color: aqua; height: 800px;"></div>
+      <!-- SideBar -->
+      <div class="left-card me-4" style="background-color: aqua; height: 800px;"></div>
+      <!-- Tab -->
       <div class="menu-container position-relative align-items-center me-5">
         <div class="tab d-flex gap-3">
           <div class="menu-wrapper overflow-hidden position-relative">
-            <button
-              class="scroll-btn left bg-white border-0 h-100"
-              (click)="scrollLeftButton()"
-              *ngIf="showLeftButton"
-            >
+            <button class="scroll-btn left bg-white border-0 h-100" (click)="scrollLeftButton()" *ngIf="showLeftButton">
               <i class="bi bi-chevron-left"></i>
             </button>
-            <div
-              class="menu overflow-hidden"
-              #menu
-              (mousedown)="onMouseDown($event)"
-              (mouseup)="onMouseUp()"
-              (mouseleave)="onMouseLeave()"
-              (mousemove)="onMouseMove($event)"
-              (scroll)="onScroll()"
-            >
-              <div
-                class="menu-item d-flex flex-column align-items-center"
-                *ngFor="let item of items"
-              >
+            <div class="menu overflow-hidden" #menu (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp()"
+              (mouseleave)="onMouseLeave()" (mousemove)="onMouseMove($event)" (scroll)="onScroll()">
+              <div class="menu-item d-flex flex-column align-items-center" *ngFor="let item of items">
                 <i class="me-2" [ngClass]="item.icon"></i>
                 <span>{{ item.headerText }}</span>
               </div>
             </div>
-            <button
-              class="scroll-btn right bg-white border-0 h-100"
-              (click)="scrollRightButton()"
-              *ngIf="showRightButton"
-            >
+            <button class="scroll-btn right bg-white border-0 h-100" (click)="scrollRightButton()"
+              *ngIf="showRightButton">
               <i class="bi bi-chevron-right"></i>
             </button>
           </div>
@@ -43,26 +28,54 @@
               <i class="bi bi-chevron-down"> </i>
             </button>
             <span> ALL </span>
-            <div
-              class="dropdown-menu"
-              [ngClass]="{ show: dropdownOpen }"
-              aria-labelledby="dropdownToggleButton"
-              style="position: absolute; min-width: 17rem; top: 81px; right: 3%"
-            >
+            <div class="dropdown-menu" [ngClass]="{ show: dropdownOpen }" aria-labelledby="dropdownToggleButton"
+              style="position: absolute; min-width: 15rem; top: 81px; right: 0%" ClickOutside
+              (clickOutside)="onOutsideClick()" [exclude]="'.exclude-this'">
               <div style="position: relative" #scrollableMenu>
                 <ng-container *ngFor="let item of lstTab; let index = index">
-                  <div class="box-submenu">
-                    <a
-                      [id]="'item-' + index"
-                      class="btn btn-clean btn-lg ls-tab mb-2 nav-link submenu-hover"
-                    >
+                  <div type="button" class="box-submenu gap-2" (click)="selectItem(index)">
+                    <a [id]="'item-' + index" class="btn btn-clean ls-tab w-100" [ngClass]="{'selected-item': tabActive === item}">
                       <div class="d-flex align-items-center">
                         <li class="fw-bold text-submenu">
-                          <i [class]="item.largeIcon"></i>
+                          <i [class]="item.largeIcon" class="me-2"></i>
                           <span>{{ item.customName }}</span>
                         </li>
                       </div>
                     </a>
+                    <!-- Menu con -->
+                    <div class="exclude-this mainsub" class="sub-child-menu border" [id]="'submenu-' + index">
+                      <ng-container>
+                        <div class="w-100 h-100 main-container">
+                          <div class="text-header d-flex justify-content-between  ">
+                            <span>
+                              {{item.customName }}
+                            </span>
+
+                            <i class="icon-close" style="cursor:pointer">
+                            </i>
+                          </div>
+                          <div class="mt-2 d-flex flex-column justify-content-start main-function">
+                            <div class=" d-flex justify-content-between main-items" *ngFor="let tab of lstTab">
+                              <span style="cursor:pointer">
+                                {{tab.customName}}
+                              </span>
+                              <i class="bi bi-pin-fill"></i>
+                              <!-- [ngClass]="{'acitve-i':tab.tempactive,'non-active-i':!tab.tempactive}">  -->
+                            </div>
+
+                          </div>
+
+                          <div class="d-flex justify-content-between">
+                            <button class="filter-button rounded-2 p-2">
+                              <span class="icon-i-arrow-clockwise fs-5-sm pt-1">Hủy bỏ</span>
+                            </button>
+                            <button type="button" class="confirm-button rounded-2 p-2">
+                              <span class="icon-done fs-5-sm">Áp dụng</span>
+                            </button>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
                   </div>
                 </ng-container>
               </div>

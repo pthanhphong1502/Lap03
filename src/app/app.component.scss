@@ -12,8 +12,6 @@
   height: calc(100vh - 100px);
 }
 
-
-
 .menu-container {
   position: relative;
   width: 100%;
@@ -37,10 +35,6 @@
   cursor: grab;
   white-space: nowrap;
   // padding: 0 0 0 30px; /* Adjust based on button width */
-}
-
-.menu:active {
-  cursor: grabbing;
 }
 
 .menu-item {
@@ -99,17 +93,24 @@
   border: none;
 }
 
-.text-submenu {
-  span {
-      font-family: Roboto;
-  }
-}
-
 .box-submenu {
   color: white !important;
+  &:hover {
+    background-color: rgb(240, 238, 238);
+    border-radius: 5px;
+
+    i {
+      color: blue;
+    }
+
+    span {
+      color: blue;
+    }
+  }
 }
 
-.box-submenu li:hover {
+.active-btn {
+  background-color: var(--Theme-Primary-Darker, #005DC7) !important;
   i {
       color: white;
   }
@@ -118,19 +119,19 @@
   }
 }
 
-.ls-tab {
-  width: 98%;
+.sub-child-menu {
+  position: absolute;
+  z-index: 12;
+  right: 101.5%;
+  border-radius: 5px;
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 230px;
 }
 
-.ls-tab:hover+.mainsub,
-.mainsub:hover {
-  background-color: #0078ff !important;
-  span {
-      color: white !important;
-  }
-  i {
-      color: white !important;
+.selected-item {
+  background-color: #005DC7;
+  i, span {
+    color: white;
   }
 }
-
-
