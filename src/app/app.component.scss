@@ -97,8 +97,29 @@
   border: none;
 }
 
+.selected-tabMenu {
+  background-color: #005DC7;
+  i, span {
+    color: white;
+  }
+  &:hover {
+    background-color: #005DC7;
+    i, span {
+      color: white;
+    }
+  }
+}
+
 .box-submenu {
   color: white !important;
+
+  &:active {
+    background-color: #005DC7;
+    i, span {
+      color: white;
+    }
+  }
+
   &:hover {
     background-color: rgb(240, 238, 238);
     border-radius: 5px;
@@ -113,16 +134,6 @@
   }
 }
 
-.active-btn {
-  background-color: var(--Theme-Primary-Darker, #005DC7) !important;
-  i {
-      color: white;
-  }
-  span {
-      color: white;
-  }
-}
-
 .sub-child-menu {
   position: absolute;
   z-index: 12;
@@ -133,9 +144,7 @@
   width: 230px;
 }
 
-.selected-item {
-  background-color: #005DC7;
-  i, span {
-    color: white;
-  }
+.selected-tab {
+  border-bottom: 3px solid #005DC7;
 }
+

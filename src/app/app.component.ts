@@ -13,21 +13,31 @@ export class AppComponent implements OnInit {
   showLeftButton = false;
   showRightButton = true;
   dropdownOpen = false;
+  tabMenuActive: any;
   tabActive: any;
   active = true;
+  childrenTabs: any[] = [];
 
-  selectItem(index: number): void {
-    this.tabActive = this.lstTab[index];
+  selectMenuActive(index: number): void {
+    this.tabMenuActive = this.lstTab[index];
+  }
+
+  selectTabActive(index: number): void {
+    this.tabActive = this.childrenTabs[index];
   }
 
   ngOnInit(): void {
     this.lstTab;
-    this.tabActive = this.lstTab[0];
-    console.log('tabActive', this.tabActive)
+    this.tabMenuActive = this.lstTab[0];
+    console.log('tabActive', this.tabMenuActive)
     console.log(this.lstTab);
-    for (let i = 0; i < this.lstTab.length; i++) {
-
-    }
+    this.lstFuncCurriculumVitae;
+    console.log('lstFuncCurriculumVitae', this.lstFuncCurriculumVitae);
+    this.lstFuncLegalInfo;
+    console.log('lstFuncLegalInfo', this.lstFuncLegalInfo);
+    this.childrenTabs = this.childrenTabs.concat(this.lstFuncCurriculumVitae, this.lstFuncLegalInfo);
+    console.log('childrenTabs', this.childrenTabs);
+    this.tabActive = this.childrenTabs[0];
   }
 
   // Tắt mở Dropdown button ALL
@@ -211,8 +221,317 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  lstFuncCurriculumVitae: any = []; // SYLL
-  lstFuncLegalInfo: any = []; // Pháp lý
+   // SYLL
+  lstFuncCurriculumVitae = [
+    {
+      customName: 'Thông tin cá nhân',
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10101",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-calendar",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM10101",
+      userID: ""
+    },
+    {
+      customName: 'Thông tin công việc',
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10102",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-check-square",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM102",
+      userID: ""
+    },
+    {
+      customName: 'Thông tin tuyển dụng',
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10103",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM103",
+      userID: ""
+    },
+    {
+      customName: 'Thân nhân',
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10104",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-clock",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM104",
+      userID: ""
+    },
+    {
+      customName: "Thông tin Đảng-Đoàn",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10105",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Tiểu sử cá nhân",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10106",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Lao động nước ngoài",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10107",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Hồ sơ cần nộp",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10108",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+  ]
+
+  // Phap ly
+  lstFuncLegalInfo = [
+    {
+      customName: 'Sổ bảo hiểm - Sổ lao động',
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10201",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-calendar",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM10101",
+      userID: ""
+    },
+    {
+      customName: 'Tài khoản cá nhân',
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10202",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-check-square",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM102",
+      userID: ""
+    },
+    {
+      customName: 'Hợp đồng lao động',
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10203",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM103",
+      userID: ""
+    },
+    {
+      customName: 'Hộ chiếu',
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10204",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-clock",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM104",
+      userID: ""
+    },
+    {
+      customName: "Thị thực",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10205",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Giấy phép lao động",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10206",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM101",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Miễn giấy phép lao động",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10207",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Thẻ tạm trú",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10208",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Đăng ký tạm trú",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10209",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Giấy phép lái xe",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10210",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+    {
+      customName: "Thông tin ủy quyền",
+      entityName: "HR_EmpList",
+      formName: "EmpList",
+      functionID: "HREM10211",
+      functionType: "T",
+      gridViewName: "grvEmpList",
+      isActive: true,
+      isBookmark: false,
+      language: "VN",
+      largeIcon: "bi bi-person",
+      module: "HR",
+      parentID: "HREM102",
+      url: "hr/emplist/HREM105",
+      userID: ""
+    },
+  ]
   lstFuncSalaryBenefit: any = []; // Phúc lợi
   lstFuncHRProcess: any = []; // QTLV
   lstFuncAward: any = []; // Khen thưởng - Kỹ luật
