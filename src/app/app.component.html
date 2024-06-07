@@ -2,79 +2,43 @@
   <div class="page-profile">
     <div class="d-flex">
       <!-- SideBar -->
-      <div
-        class="left-card me-4"
-        style="background-color: aqua; height: 1000px"
-      ></div>
+      <div class="left-card me-4" style="background-color: aqua; height: 1000px"></div>
       <!-- Tab -->
       <div class="menu-container position-relative align-items-center me-3">
         <div class="tab d-flex gap-3 rounded">
           <div class="menu-wrapper overflow-hidden position-relative">
-            <button
-              class="scroll-btn left bg-white border-0 h-100"
-              (click)="scrollLeftButton()"
-              *ngIf="showLeftButton"
-            >
+            <button class="scroll-btn left bg-white border-0 h-100" (click)="scrollLeftButton()" *ngIf="showLeftButton">
               <i class="bi bi-chevron-left"></i>
             </button>
-            <div
-              class="menu overflow-hidden"
-              #menu
-              (mousedown)="onMouseDown($event)"
-              (mouseup)="onMouseUp()"
-              (mouseleave)="onMouseLeave()"
-              (mousemove)="onMouseMove($event)"
-              (scroll)="onScroll()"
-            >
+            <div class="menu overflow-hidden" #menu (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp()"
+              (mouseleave)="onMouseLeave()" (mousemove)="onMouseMove($event)" (scroll)="onScroll()">
               <ng-container *ngFor="let tab of childrenTabs; let index = index">
-                <div
-                [id]="'tab-' + index"
-                class="menu-item d-flex flex-column align-items-center"
-                [ngClass]="{ 'selected-tab': tabActive === tab }"
-                (click)="selectTabActive(index)">
-                  <i class="me-2" [ngClass]="tab.largeIcon"></i>
+                <div *ngIf="tab.isPin" [id]="tab.functionID" class="menu-item d-flex flex-column align-items-center"
+                  [ngClass]="{ 'selected-tab': tabActive === tab }" (click)="selectTabActive(index)">
+                  <i class="largeIcon me-2" [ngClass]="tab.largeIcon"></i>
                   <span>{{ tab.customName }}</span>
                 </div>
               </ng-container>
             </div>
-            <button
-              class="scroll-btn right bg-white border-0 h-100"
-              (click)="scrollRightButton()"
-              *ngIf="showRightButton"
-            >
+            <button class="scroll-btn right bg-white border-0 h-100" (click)="scrollRightButton()"
+              *ngIf="showRightButton">
               <i class="bi bi-chevron-right"></i>
             </button>
           </div>
 
           <div class="icon-all me-3">
-            <button
-              class="exclude-this btn-arrow-down"
-              (click)="toggleDropdown()"
-            >
+            <button class="exclude-this btn-arrow-down" (click)="toggleDropdown()">
               <i class="bi bi-chevron-down"> </i>
             </button>
             <span> ALL </span>
-            <div
-              class="dropdown-menu"
-              [ngClass]="{ show: dropdownOpen }"
-              aria-labelledby="dropdownToggleButton"
-              style="position: absolute; min-width: 15rem; top: 81px; right: 0%"
-              ClickOutside
-              (clickOutside)="onOutsideClick()"
-              [exclude]="'.exclude-this'"
-            >
+            <div class="dropdown-menu" [ngClass]="{ show: dropdownOpen }" aria-labelledby="dropdownToggleButton"
+              style="position: absolute; min-width: 15rem; top: 81px; right: 0%" ClickOutside
+              (clickOutside)="onOutsideClick()" [exclude]="'.exclude-this'">
               <div style="position: relative" #scrollableMenu>
                 <ng-container *ngFor="let item of lstTab; let index = index">
-                  <div
-                    type="button"
-                    class="box-submenu gap-2"
-                    (click)="selectMenuActive(index)"
-                  >
-                    <a
-                      [id]="'tabMenu-' + index"
-                      class="btn btn-clean ls-tab w-100"
-                      [ngClass]="{ 'selected-tabMenu': tabMenuActive === item }"
-                    >
+                  <div type="button" class="box-submenu gap-2">
+                    <a [id]="'tabMenu-' + index" class="btn btn-clean ls-tab w-100"
+                      [ngClass]="{ 'selected-tabMenu': tabMenuActive === item }" (click)="selectMenuActive(index)">
                       <div class="d-flex align-items-center">
                         <li class="fw-bold text-submenu">
                           <i [class]="item.largeIcon" class="me-2"></i>
@@ -83,50 +47,47 @@
                       </div>
                     </a>
                     <!-- Menu con -->
-                    <div
-                      class="exclude-this mainsub"
-                      class="sub-child-menu border"
-                      [id]="'submenu-' + index"
-                    >
-                      <ng-container>
+                    <div *ngIf="tabMenuActive === item && isSubMenuVisible" class="exclude-this mainsub" class="sub-child-menu border" [id]="item.functionID">
                         <div class="w-100 h-100 main-container">
-                          <div
-                            class="text-header d-flex justify-content-between"
-                          >
-                            <span>
+                          <div class="text-header d-flex justify-content-between ms-2 mt-3">
+                            <span class="fs-6" style="color: #005DC7;">
                               {{ item.customName }}
                             </span>
-
-                            <i class="icon-close" style="cursor: pointer"> </i>
+                            <button 
+                            type="button" 
+                            class="btn-close" 
+                            aria-label="Close" 
+                            style="font-size: 12px;"
+                            (click)="closeSubMenu()"
+                            ></button>
                           </div>
-                          <div
-                            class="mt-2 d-flex flex-column justify-content-start main-function"
-                          >
-                            <div
-                              class="d-flex justify-content-between main-items"
-                              *ngFor="let tab of lstTab"
-                            >
-                              <span style="cursor: pointer">
-                                {{ tab.customName }}
+                          <div class="mt-3 d-flex flex-column justify-content-start main-function">
+                            <ng-container *ngFor="let subMenu of lstSubMenu">
+                            <div class="d-flex justify-content-between main-items mt-1 mx-2">
+                              <span class="fs-6" style="cursor: pointer" (click)="clickTabSubMenu(subMenu)">
+                                {{ subMenu.customName }}
                               </span>
-                              <i class="bi bi-pin-fill"></i>
+                              <i 
+                              class="bi bi-pin-fill" 
+                              [ngClass]="{'pin':subMenu.isPin,'non-pin':!subMenu.isPin}"
+                              (click)="changePinTab(subMenu)"
+                              ></i>
+                              
                               <!-- [ngClass]="{'acitve-i':tab.tempactive,'non-active-i':!tab.tempactive}">  -->
                             </div>
+                          </ng-container>
+
                           </div>
 
-                          <div class="d-flex justify-content-between">
-                            <button class="filter-button rounded-2 p-2">
-                              <span class="icon-i-arrow-clockwise fs-5-sm pt-1">Hủy bỏ</span>
+                          <div class="d-flex justify-content-between mt-3 mx-2 mb-3">
+                            <button class="filter-button rounded-2 p-2" (click)="unCheckedAll()">
+                              <span class="icon-i-arrow-clockwise fs-5-sm pt-1">Bỏ tất cả</span>
                             </button>
-                            <button
-                              type="button"
-                              class="confirm-button rounded-2 p-2"
-                            >
-                              <span class="icon-done fs-5-sm">Áp dụng</span>
+                            <button type="button" class="confirm-button rounded-2 p-2" (click)="checkedAll()">
+                              <span class="icon-done fs-5-sm">Chọn tất cả</span>
                             </button>
                           </div>
                         </div>
-                      </ng-container>
                     </div>
                   </div>
                 </ng-container>
@@ -135,8 +96,20 @@
           </div>
         </div>
         <!-- Content -->
-        <div>Content</div>
+         <ng-container *ngFor="let tab of listTemplateTabs">
+          <div *ngIf="tabActive.functionID === tab.name" class="main-content-container">
+              <ng-container *ngTemplateOutlet="tab.template"></ng-container>
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #eInfo>
+  <div>eInfo nè</div>
+</ng-template>
+
+<ng-template #eJob>
+  <div>eJob nè</div>
+</ng-template>
